@@ -58,7 +58,7 @@ private:
     }
     int get_disc(Point p) const {
         if((p.x>=0&&p.x<8)||(p.y>=0&&p.y<8))return board[p.x][p.y];
-        else return -1;
+        else return -1;//????????????????
     }
     void set_disc(Point p, int disc) {
         board[p.x][p.y] = disc;
@@ -312,7 +312,7 @@ void write_valid_spot(std::ofstream& fout) { //output next spot
     B.Next_valid_spots = next_valid_spots;
     int ans = -87878787;
     for(auto s: next_valid_spots){
-        int tmp = alphabeta(B, s, 4, -87878787, 87878787, player);
+        int tmp = alphabeta(B, s, 6, -87878787, 87878787, player);
         if(tmp>ans){
             ans=tmp;
             P.x=s.x;
