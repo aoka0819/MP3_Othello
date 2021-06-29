@@ -57,7 +57,8 @@ private:
         return 0 <= p.x && p.x < SIZE && 0 <= p.y && p.y < SIZE;
     }
     int get_disc(Point p) const {
-        return board[p.x][p.y];
+        if((p.x>=0&&p.x<8)||(p.y>=0&&p.y<8))return board[p.x][p.y];
+        else return -1;
     }
     void set_disc(Point p, int disc) {
         board[p.x][p.y] = disc;
@@ -267,7 +268,7 @@ int alphabeta(OthelloBoard oboard, int depth, int alpha, int beta, int curPlayer
     OB.Next_valid_spots = OB.get_valid_spots();//previous round's
     if (depth == 0 || OB.done) return count_score(OB.board);
     
-    else if (curPlayer==player){
+    if (curPlayer==player){
         int val = -87878787;
         if(OB.Next_valid_spots.size()==0){//player this round cant move
             int tmp = alphabeta(OB, depth-1, alpha, beta, 3-OB.cur_player);
@@ -311,7 +312,7 @@ void write_valid_spot(std::ofstream& fout) { //output next spot
     B.Next_valid_spots = next_valid_spots;
     int ans = -87878787;
     for(auto s: next_valid_spots){
-        int tmp = alphabeta(B, s, 5, -87878787, 87878787, player);
+        int tmp = alphabeta(B, s, 4, -87878787, 87878787, player);
         if(tmp>ans){
             ans=tmp;
             P.x=s.x;
@@ -322,26 +323,6 @@ void write_valid_spot(std::ofstream& fout) { //output next spot
     fout << P.x << " " << P.y << std::endl;
     fout.flush();
 }
-/*Brd putDisc(int Board[8][8], Point disc, int id){//current_board/position/1 or 2
-    Brd b;
-    //put disc
-    for(int i=0;i<8;i++)for(int j=0;j<8;j++) b.brd[i][j]=Board[i][j];
-    b.brd[disc.x][disc.y]=id;
-    //flip disc and save as new board //hwt free?
-    //B->W , W->B
-    for (Point dir: directions) {
-        // Move along the direction while testing.
-        Point p = disc + dir;
-        int num = 0;
-    }
-    return b;
-}
-
-int find_next_idx(){//Minimax + alpha-beta
-    int idx=-1;
-    
-    return idx;
-}*/
 
 int main(int, char** argv) {
     std::ifstream fin(argv[1]);
