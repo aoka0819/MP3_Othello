@@ -312,7 +312,7 @@ void write_valid_spot(std::ofstream& fout) { //output next spot
     B.Next_valid_spots = next_valid_spots;
     int ans = -87878787;
     for(auto s: next_valid_spots){
-        int tmp = alphabeta(B, s, 6, -87878787, 87878787, player);
+        int tmp = alphabeta(B, s, 5, -87878787, 87878787, player);
         if(tmp>ans){
             ans=tmp;
             P.x=s.x;
