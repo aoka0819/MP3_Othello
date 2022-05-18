@@ -11,6 +11,9 @@
 #define max(a, b) a>b?a:b
 #define min(a, b) a<b?a:b
 
+void test() {
+    return 0;
+}
 struct Point {
     int x, y;
     Point() : Point(0, 0) {}
